@@ -26,7 +26,34 @@ def add_student(
     print(f"Đã thêm sinh viên: {new_student}")
 
     return students
+def search_student(students: list, keyword: str) -> list:
+    """Tìm kiếm sinh viên theo tên hoặc mã."""
 
+    results = []
+    keyword_lower = keyword.lower()
+
+    for s in students:
+        if (
+            keyword_lower in s.name.lower()
+            or keyword_lower in s.student_id.lower()
+        ):
+            results.append(s)
+
+    if results:
+        print(
+            f"Tìm thấy {len(results)} sinh viên "
+            f"với từ khóa '{keyword}':"
+        )
+
+        for s in results:
+            print(f"  {s}")
+    else:
+        print(
+            f"Không tìm thấy sinh viên nào "
+            f"với từ khóa '{keyword}'"
+        )
+
+    return results
 
 def main():
     print("=" * 50)
@@ -49,7 +76,8 @@ def main():
 
     for student in students:
         print(f"  {student}")
-
+    print("\n--- Tìm kiếm ---")
+    search_student(students, "Van")
     print(f"\nTotal: {len(students)} students")
 
 
